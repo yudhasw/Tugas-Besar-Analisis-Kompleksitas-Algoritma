@@ -9247,6 +9247,7 @@
             document.getElementById('totalData').textContent = `Total Data: ${data.length}`;
         }
 
+        //iteratif
         function insertionSortIterative(data, n) {
             for (let i = 1; i < n; i++) {
                 let temp = data[i];
@@ -9261,17 +9262,7 @@
             }
         }
 
-        function insertSorted(dataLaundry, n) {
-            const temp = dataLaundry[n];
-            let j = n - 1;
-
-            while (j >= 0 && dataLaundry[j].skala_prioritas > temp.skala_prioritas) {
-                dataLaundry[j + 1] = dataLaundry[j];
-                j--;
-            }
-            dataLaundry[j + 1] = temp;
-        }
-
+        //rekursif
         function insertionSortRecursive(dataLaundry, n) {
             if (n <= 1) {
                 return;
@@ -9279,6 +9270,14 @@
 
             insertionSortRecursive(dataLaundry, n - 1);
             insertSorted(dataLaundry, n - 1);
+        }
+        function insertSorted(dataLaundry, n) {
+            if (n <= 0 || dataLaundry[n].skala_prioritas 
+                            >= dataLaundry[n - 1].skala_prioritas) {
+                return;
+            }
+            [dataLaundry[n], dataLaundry[n - 1]] = [dataLaundry[n - 1], dataLaundry[n]];
+            insertSorted(dataLaundry, n - 1); // Memastikan elemen terurut
         }
 
         function sortData(method) {
